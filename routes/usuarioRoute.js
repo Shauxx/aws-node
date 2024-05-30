@@ -71,4 +71,25 @@ router.put('/:id', async (req, res) => {
 });
 
 
+// Ruta para login
+router.post('/login', async (req, res) => {
+    const { usuario, contra } = req.body;
+
+    try {
+        const user = await User.findOne({ where: { usuario } });
+
+        if (!user || user.contra !== contra) {
+            return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+        }
+
+        // Aquí puedes generar y devolver un token JWT, pero para este ejemplo solo devolvemos un mensaje
+        res.json({ message: 'Login exitoso', userId: user.id });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+
 export default router;
