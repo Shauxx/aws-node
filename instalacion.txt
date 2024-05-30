@@ -1,0 +1,5 @@
+node
+npm install cors express multer pg sequelize sharp
+npm install --save-dev nodemon
+npm install mssql
+
